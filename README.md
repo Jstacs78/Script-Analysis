@@ -36,6 +36,106 @@ Further Considerations/Potential Issues:
 - Scripts with inconsistent formatting or unusual layouts.
 - Performance on very large scripts.
 
+# Script Microphone Assigner
+
+## Purpose
+The Script Microphone Assigner is a simple application designed to assist in stage production planning by automatically analyzing a script to determine microphone assignments for characters. It processes script text (either directly pasted or from a PDF file) and assigns microphone numbers based on each character's total number of lines. The character with the most lines is assigned Microphone 1, the next most prolific character gets Microphone 2, and so on.
+
+## How It Works
+The application employs a robust regex-based extraction mechanism to parse the provided script. It operates as follows:
+1.  **Script Input**: Users can either paste the script text directly into the application's interface or upload a script as a `.txt` or `.pdf` file.
+2.  **Text Extraction (for PDFs)**: For PDF inputs, the application uses PyMuPDF to extract text content from each page, ensuring comprehensive processing of document-based scripts.
+3.  **Character and Dialogue Identification**: A set of refined regular expressions and state management logic is applied to identify character names and their corresponding lines. This process is designed to accurately distinguish dialogue from other script elements.
+4.  **Exclusions**: The regex patterns are specifically crafted to exclude non-dialogue elements such as scene headings (e.g., INT. CASTLE - NIGHT), act markers (e.g., ACT I), and standalone stage directions (e.g., (Whispering to himself) or [SOUND OF THUNDER]).
+5.  **Line Counting**: The number of lines spoken by each identified character is counted.
+6.  **Microphone Assignment**: Characters are then ranked by their total line count in descending order. Microphone 1 is assigned to the character with the most lines, Microphone 2 to the next, and so forth.
+
+## Features
+*   **Flexible Input**: Supports script input via direct text paste or file upload (.txt, .pdf).
+*   **Automated Character Extraction**: Accurately identifies character names and their dialogue using advanced regex patterns.
+*   **Smart Filtering**: Effectively filters out scene headings, act markers, and stage directions to focus solely on dialogue.
+*   **Line Counting**: Provides a clear count of lines for each character.
+*   **Prioritized Microphone Assignment**: Assigns microphone numbers intuitively based on the volume of dialogue.
+*   **User-Friendly Interface**: Built with Gradio for an easy-to-use web interface, allowing quick analysis and display of results.
+
+## Running Instructions
+
+### Prerequisites
+*   Python 3.8 or higher
+*   `pip` (Python package installer)
+
+### Installation
+1.  **Install Libraries**: Open your terminal or Colab notebook and run the following command to install the necessary Python libraries:
+    ```bash
+    pip install gradio PyMuPDF
+    ```
+
+### Application Code
+1.  Save the entire Python code for the application (including all function definitions for `read_pdf`, `extract_character_lines`, `extract_character_lines_basic`, `count_character_lines`, `assign_microphones`, `process_script_input`, and the Gradio interface setup) into a single Python file (e.g., `mic_assigner_app.py`).
+
+### Execution
+1.  **Via Python Script**: If you saved the code as `mic_assigner_app.py`, navigate to the directory containing the file in your terminal and run:
+    ```bash
+    python mic_assigner_app.py
+    ```
+2.  **Via Google Colab/Jupyter Notebook**: If running in a Colab or Jupyter environment, simply execute the code cell containing the Gradio `iface.launch()` command. Gradio will provide a local URL and potentially a public share link.
+
+### Usage
+Once the Gradio application is running, a web interface will open (or a link will be provided):
+1.  **Paste Script Text**: You can paste your script directly into the "Paste Script Text Here" textbox.
+2.  **Upload Script File**: Alternatively, click on "Or Upload a Script File (.txt or .pdf)" to upload your script.
+3.  The "Microphone Assignments" section will display the character names and their assigned microphone numbers, ordered by their line count.
+"""
+# Script Microphone Assigner
+
+## Purpose
+The Script Microphone Assigner is a simple application designed to assist in stage production planning by automatically analyzing a script to determine microphone assignments for characters. It processes script text (either directly pasted or from a PDF file) and assigns microphone numbers based on each character's total number of lines. The character with the most lines is assigned Microphone 1, the next most prolific character gets Microphone 2, and so on.
+
+## How It Works
+The application employs a robust regex-based extraction mechanism to parse the provided script. It operates as follows:
+1.  **Script Input**: Users can either paste the script text directly into the application's interface or upload a script as a `.txt` or `.pdf` file.
+2.  **Text Extraction (for PDFs)**: For PDF inputs, the application uses PyMuPDF to extract text content from each page, ensuring comprehensive processing of document-based scripts.
+3.  **Character and Dialogue Identification**: A set of refined regular expressions and state management logic is applied to identify character names and their corresponding lines. This process is designed to accurately distinguish dialogue from other script elements.
+4.  **Exclusions**: The regex patterns are specifically crafted to exclude non-dialogue elements such as scene headings (e.g., INT. CASTLE - NIGHT), act markers (e.g., ACT I), and standalone stage directions (e.g., (Whispering to himself) or [SOUND OF THUNDER]).
+5.  **Line Counting**: The number of lines spoken by each identified character is counted.
+6.  **Microphone Assignment**: Characters are then ranked by their total line count in descending order. Microphone 1 is assigned to the character with the most lines, Microphone 2 to the next, and so forth.
+
+## Features
+*   **Flexible Input**: Supports script input via direct text paste or file upload (.txt, .pdf).
+*   **Automated Character Extraction**: Accurately identifies character names and their dialogue using advanced regex patterns.
+*   **Smart Filtering**: Effectively filters out scene headings, act markers, and stage directions to focus solely on dialogue.
+*   **Line Counting**: Provides a clear count of lines for each character.
+*   **Prioritized Microphone Assignment**: Assigns microphone numbers intuitively based on the volume of dialogue.
+*   **User-Friendly Interface**: Built with Gradio for an easy-to-use web interface, allowing quick analysis and display of results.
+
+## Running Instructions
+
+### Prerequisites
+*   Python 3.8 or higher
+*   `pip` (Python package installer)
+
+### Installation
+1.  **Install Libraries**: Open your terminal or Colab notebook and run the following command to install the necessary Python libraries:
+    ```bash
+    pip install gradio PyMuPDF
+    ```
+
+### Application Code
+1.  Save the entire Python code for the application (including all function definitions for `read_pdf`, `extract_character_lines`, `extract_character_lines_basic`, `count_character_lines`, `assign_microphones`, `process_script_input`, and the Gradio interface setup) into a single Python file (e.g., `mic_assigner_app.py`).
+
+### Execution
+1.  **Via Python Script**: If you saved the code as `mic_assigner_app.py`, navigate to the directory containing the file in your terminal and run:
+    ```bash
+    python mic_assigner_app.py
+    ```
+2.  **Via Google Colab/Jupyter Notebook**: If running in a Colab or Jupyter environment, simply execute the code cell containing the Gradio `iface.launch()` command. Gradio will provide a local URL and potentially a public share link.
+
+### Usage
+Once the Gradio application is running, a web interface will open (or a link will be provided):
+1.  **Paste Script Text**: You can paste your script directly into the "Paste Script Text Here" textbox.
+2.  **Upload Script File**: Alternatively, click on "Or Upload a Script File (.txt or .pdf)" to upload your script.
+3.  The "Microphone Assignments" section will display the character names and their assigned microphone numbers, ordered by their line count.
+"""
 
 
 
