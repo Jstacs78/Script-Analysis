@@ -143,10 +143,6 @@ used in the final application.
 
 Running the Application
 
-Install: pip install gradio PyMuPDF
-
-Run: python mic_assigner_app.py
-
 Usage Instructions 1. Paste script text or upload a file 2. Submit 3.
 View character line counts & microphone assignments
 
